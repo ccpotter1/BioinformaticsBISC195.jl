@@ -1,4 +1,4 @@
-module BioinformaticsBISC195
+module Assignment07
 
 export normalizeDNA,
         composition,
@@ -92,7 +92,7 @@ function reverse_complement(seq)
 end
 
 function parse_fasta(path)
-
+    
     header_vector = []
     combined_seq_vector = []
     currentvector = [] #for sequences
