@@ -1,4 +1,4 @@
-module Assignment07
+module BioinformaticsBISC195
 
 export normalizeDNA,
         composition,
@@ -115,4 +115,4 @@ function parse_fasta(path)
     return header_vector, combined_seq_vector[2:end] #dont return the empty string from the first header
 end
 
-end # module Assignment07
+end # module BioinformaticsBISC195
