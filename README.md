@@ -1,4 +1,4 @@
-# Assignment 07 - Lesson Name
+#  BioinformaticsBISC195 - Lesson Name
 
 [![Assignment 07 invitation](https://img.shields.io/badge/Assignment07-Repository-blue?style=for-the-badge&logo=open%20badges)](https://classroom.github.com/a/OrKQtjqa)
 [![Assignment 07 - Description](https://img.shields.io/badge/Assignment07-Description-blue?style=for-the-badge&logo=open%20badges)](https://wellesley-bisc195.github.io/BISC195.jl/stable/Assignments/Assignment07.html)
