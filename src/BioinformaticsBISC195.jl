@@ -21,7 +21,7 @@ function normalizeDNA(seq)
     seq = uppercase(string(seq))
     for base in seq
         # note: `N` indicates an unknown base
-        occursin(base, "AGCTN") || error("invalid base $base")
+        occursin(base, "AGCTNYRWMKSHVDB") || error("invalid base $base")
     end
     return seq # change to `return LongDNASeq(seq)` if you want to try to use BioSequences types
 end
