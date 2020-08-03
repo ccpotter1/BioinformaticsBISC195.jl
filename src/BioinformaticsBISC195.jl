@@ -116,3 +116,28 @@ function parse_fasta(path)
 end
 
 end # module BioinformaticsBISC195
+
+function remove_short_genomes(path)
+    genomes = parse_fasta(path)
+    long_combined_seq_vector= []
+    a = findall(isless(25000, ), genomes[2])
+     push!(long_combined_seq_vector, a )
+     return long_combined_seq_vector
+end
+
+function unique_kmers(sequence, k) #k is an integer
+    1 <= k <= length(sequence) || error("k must be a positive integer less than the length of the sequence")
+    kmers = Dict() # initialize dictionary
+    stopindex = lastindex(sequence)-(k-1)
+    for i in 1:stopindex
+        kmer = sequence[i:i+(k-1)] # Change to index the sequence from i to i+k-1
+        kmer = normalizeDNA(kmer) 
+       if haskey(kmers, kmer) # if this kmer is a key the dictionary
+       kmers[kmer] = kmers[kmer] + 1 #   add 1 to the value referenced by that kmer
+       else # otherwise
+       kmers[kmer] = 1 #  make a new entry in the dictionary with a value of 1
+    end
+end
+return kmers #return all unique kmers of length k
+end
+
