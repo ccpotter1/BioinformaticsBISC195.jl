@@ -8,7 +8,8 @@ export normalizeDNA,
         parse_fasta,
         myisless,
         remove_short_genomes,
-        unique_kmers
+        unique_kmers,
+        kmer_distance
 
 
 # # uncomment the following line if you intend to use BioSequences types
@@ -129,7 +130,7 @@ function remove_short_genomes(path)
     genomes = parse_fasta(path)
     shortgenomes = findall(myisless, genomes[2]) #creates array with the indicies of genomes that are less than 30,000 bp
      deleteat!(genomes[2], shortgenomes) #removes the short genomes from the seq vector
-     deleteat!(genomes[1], shortgenomes) #removes the short genomes from the header vector
+     deleteat!(genomes[1], shortgenomes) #removes the short genomes from the header vector 
 end
 
 function count_kmers(sequence, k) #k is an integer
@@ -158,3 +159,5 @@ function unique_kmers(sequence, k) #makes a vector of all of the kmers of length
     end
 return kmers #return all unique kmers of length k
 end
+
+function kmer_distance()
