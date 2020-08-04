@@ -5,7 +5,11 @@ export normalizeDNA,
         gc_content,
         complement,
         reverse_complement,
-        parse_fasta
+        parse_fasta,
+        myisless,
+        remove_short_genomes,
+        unique_kmers
+
 
 # # uncomment the following line if you intend to use BioSequences types
 # using BioSequences
@@ -117,15 +121,18 @@ end
 
 end # module BioinformaticsBISC195
 
-function remove_short_genomes(path)
-    genomes = parse_fasta(path)
-    long_combined_seq_vector= []
-    a = findall(isless(25000, ), genomes[2])
-     push!(long_combined_seq_vector, a )
-     return long_combined_seq_vector
+function myisless(x)
+    return length(x)< 30000 #change number based on what length genomes you want to remove
 end
 
-function unique_kmers(sequence, k) #k is an integer
+function remove_short_genomes(path)
+    genomes = parse_fasta(path)
+    shortgenomes = findall(myisless, genomes[2]) #creates array with the indicies of genomes that are less than 30,000 bp
+     deleteat!(genomes[2], shortgenomes) #removes the short genomes from the seq vector
+     deleteat!(genomes[1], shortgenomes) #removes the short genomes from the header vector
+end
+
+function count_kmers(sequence, k) #k is an integer
     1 <= k <= length(sequence) || error("k must be a positive integer less than the length of the sequence")
     kmers = Dict() # initialize dictionary
     stopindex = lastindex(sequence)-(k-1)
@@ -141,3 +148,13 @@ end
 return kmers #return all unique kmers of length k
 end
 
+function unique_kmers(sequence, k) #makes a vector of all of the kmers of length k 
+    1 <= k <= length(sequence) || error("k must be a positive integer less than the length of the sequence")
+    kmers = [] # initialize vector
+    stopindex = lastindex(sequence)-(k-1)
+    for i in 1:stopindex
+        push!(kmers, sequence[i:i+(k-1)]) # Change to index the sequence from i to i+k-1
+        kmers[i] = normalizeDNA(kmers[i]) 
+    end
+return kmers #return all unique kmers of length k
+end
