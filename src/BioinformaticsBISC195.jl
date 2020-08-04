@@ -6,8 +6,6 @@ export normalizeDNA,
         complement,
         reverse_complement,
         parse_fasta,
-        myisless,
-        remove_short_genomes,
         unique_kmers,
         kmer_distance
 
@@ -122,16 +120,6 @@ end
 
 end # module BioinformaticsBISC195
 
-function myisless(x)
-    return length(x)< 30000 #change number based on what length genomes you want to remove
-end
-
-function remove_short_genomes(path)
-    genomes = parse_fasta(path)
-    shortgenomes = findall(myisless, genomes[2]) #creates array with the indicies of genomes that are less than 30,000 bp
-     deleteat!(genomes[2], shortgenomes) #removes the short genomes from the seq vector
-     deleteat!(genomes[1], shortgenomes) #removes the short genomes from the header vector 
-end
 
 function count_kmers(sequence, k) #k is an integer
     1 <= k <= length(sequence) || error("k must be a positive integer less than the length of the sequence")
@@ -159,5 +147,3 @@ function unique_kmers(sequence, k) #makes a vector of all of the kmers of length
     end
 return kmers #return all unique kmers of length k
 end
-
-function kmer_distance()
