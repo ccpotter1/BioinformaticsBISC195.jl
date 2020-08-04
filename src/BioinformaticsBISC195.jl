@@ -7,7 +7,7 @@ export normalizeDNA,
         reverse_complement,
         parse_fasta,
         unique_kmers,
-        kmer_distance
+        kmerset_distance
 
 
 # # uncomment the following line if you intend to use BioSequences types
@@ -147,3 +147,9 @@ function unique_kmers(sequence, k) #makes a vector of all of the kmers of length
     end
 return kmers #return all unique kmers of length k
 end
+
+function kmerset_distance(kmerset1, kmerset2) #takes two Sets of kmers (Set is a type, which is an unordered collection of unique elements) and calulates the distance between them
+   distance = 1- (length(intersect(kmerset1, kmerset2)) / length(union(kmerset2, kmerset1))) #a distance of 0 is identical and a distance of 1 is no similarity
+   return distance
+end
+
